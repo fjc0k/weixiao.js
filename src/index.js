@@ -13,9 +13,11 @@ const MEDIA_INFO_URL = 'http://weixiao.qq.com/common/get_media_infop';
 const QRCODE_URL = 'http://open.weixin.qq.com/qr/code/?username=';
 
 export default class Weixiao {
+
   constructor(api) {
     if (!!api) this.setApi(api);
   }
+
   setApi({ key, secret }) {
     assertOk(key && secret, 'both key and secret can not be empty');
     this.api = {
@@ -23,9 +25,11 @@ export default class Weixiao {
       secret
     };
   }
+
   getApi() {
     return this.api;
   }
+
   getMediaInfo(mediaId) {
     assertOk(mediaId, 'media id can not be empty');
     let params = {
@@ -50,7 +54,9 @@ export default class Weixiao {
         );
     });
   }
+
   getQRCode(mediaId) {
     return QRCODE_URL + mediaId;
   }
+
 }
