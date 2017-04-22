@@ -1,5 +1,5 @@
 /*!
- * weixiao.js v1.0.0 
+ * weixiao.js v1.0.1 
  * (c) 2017 fjc0k
  * Released under the MIT License.
  */
@@ -408,6 +408,7 @@ var QRCODE_URL = 'http://open.weixin.qq.com/qr/code/?username=';
 var Weixiao = function Weixiao(api) {
   if (!!api) { this.setApi(api); }
 };
+
 Weixiao.prototype.setApi = function setApi (ref) {
     var key = ref.key;
     var secret = ref.secret;
@@ -418,9 +419,11 @@ Weixiao.prototype.setApi = function setApi (ref) {
     secret: secret
   };
 };
+
 Weixiao.prototype.getApi = function getApi () {
   return this.api;
 };
+
 Weixiao.prototype.getMediaInfo = function getMediaInfo (mediaId) {
     var this$1 = this;
 
@@ -447,6 +450,7 @@ Weixiao.prototype.getMediaInfo = function getMediaInfo (mediaId) {
       );
   });
 };
+
 Weixiao.prototype.getQRCode = function getQRCode (mediaId) {
   return QRCODE_URL + mediaId;
 };
