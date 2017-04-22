@@ -48,6 +48,10 @@ wx.setApi({
   secret: 'newSecret'
 });
 wx.getApi();
+wx.sign({
+  hello: 'world',
+  mm: 'hhh'
+}, 'yourSecret'); // 签名
 ```
 ### Browser
 ```javascript
