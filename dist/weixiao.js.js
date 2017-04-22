@@ -61,8 +61,8 @@ var jsonp = function (url, data, jsonp) {
 
     url += (url.indexOf('?') === -1 ? '?' : '&') + objectToQueryString(data);
 
-    window[callback] = function (json) {
-      resolve(json);
+    window[callback] = function (obj) {
+      resolve(obj);
       try {
         delete window[callback];
         document.body.removeChild(script);
@@ -409,8 +409,8 @@ var Weixiao = function Weixiao(api) {
   if (!!api) { this.setApi(api); }
 };
 Weixiao.prototype.setApi = function setApi (ref) {
-    var key = ref.key; if ( key === void 0 ) key = null;
-    var secret = ref.secret; if ( secret === void 0 ) secret = null;
+    var key = ref.key;
+    var secret = ref.secret;
 
   index(key && secret, 'both key and secret can not be empty');
   this.api = {

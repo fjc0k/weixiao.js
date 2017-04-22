@@ -29,8 +29,8 @@ export default function (url, data = {}, jsonp = 'callback') {
 
     url += (url.indexOf('?') === -1 ? '?' : '&') + objectToQueryString(data);
 
-    window[callback] = (json) => {
-      resolve(json);
+    window[callback] = (obj) => {
+      resolve(obj);
       try {
         delete window[callback];
         document.body.removeChild(script);

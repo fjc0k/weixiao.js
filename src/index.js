@@ -16,10 +16,7 @@ export default class Weixiao {
   constructor(api) {
     if (!!api) this.setApi(api);
   }
-  setApi({
-    key = null,
-    secret = null
-  }) {
+  setApi({ key, secret }) {
     assertOk(key && secret, 'both key and secret can not be empty');
     this.api = {
       key,
