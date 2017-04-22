@@ -3,11 +3,9 @@
  */
 
 import randomString from './randomString';
-import jsonp from './jsonp';
 import sign from './sign';
 
 export {
   randomString,
-  jsonp,
   sign
 }

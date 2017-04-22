@@ -3,9 +3,9 @@
  */
 
 import assertOk from 'assert-ok';
+import jsonp from 'ok-jsonp';
 import {
   randomString,
-  jsonp,
   sign
 } from './utils';
 

@@ -1,6 +1,6 @@
 {
   "name": "weixiao.js",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "一个小巧的腾讯微校开放平台js封装库~",
   "main": "dist/weixiao.js.common.js",
   "jsnext:main": "dist/weixiao.js.esm.js",
@@ -19,7 +19,8 @@
   "license": "MIT",
   "dependencies": {
     "assert-ok": "^1.0.0",
-    "blueimp-md5": "^2.7.0"
+    "blueimp-md5": "^2.7.0",
+    "ok-jsonp": "^1.0.0"
   },
   "devDependencies": {
     "babel-standalone": "^6.23.1",

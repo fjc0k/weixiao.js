@@ -1,5 +1,5 @@
 /*!
- * weixiao.js v1.0.4 
+ * weixiao.js v1.0.5 
  * (c) 2017 fjc0k
  * Released under the MIT License.
  */
@@ -15,21 +15,11 @@ var index = function assertOk (value, message) {
   }
 };
 
-/**
- * Created by 方剑成 on 2017/4/22.
+/*!
+ * ok-jsonp v1.0.0 
+ * (c) 2017 fjc0k
+ * Released under the MIT License.
  */
-
-var randomString = function (len) {
-  if ( len === void 0 ) len = 10;
-
-  var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('');
-  var str = '';
-  for (var i = 0; i < len; i++) {
-    str += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return str;
-};
-
 /**
  * Created by 方剑成 on 2017/4/22.
  */
@@ -40,13 +30,15 @@ var objectToQueryString = function (obj) { return (
   ).join('&') : String(obj)
 ); };
 
-var jsonp = function (url, data, jsonp) {
-  if ( data === void 0 ) data = {};
-  if ( jsonp === void 0 ) jsonp = 'callback';
+/**
+ * Created by 方剑成 on 2017/4/22.
+ */
+
+var index$1 = function (url, data, jsonp) {
+  if ( data === void 0 ) { data = {}; }
+  if ( jsonp === void 0 ) { jsonp = 'callback'; }
 
   return new Promise(function (resolve, reject) {
-
-    index(url, 'url can not be empty');
 
     var callback, script;
 
@@ -55,7 +47,7 @@ var jsonp = function (url, data, jsonp) {
       data = {};
     }
 
-    callback = 'jsonp' + randomString(6);
+    callback = 'jsonp' + Math.random().toString(36).substr(2);
 
     data[jsonp] = callback;
 
@@ -79,6 +71,23 @@ var jsonp = function (url, data, jsonp) {
     document.body.appendChild(script);
 
   });
+};
+
+var okJsonp_common = index$1;
+
+/**
+ * Created by 方剑成 on 2017/4/22.
+ */
+
+var randomString = function (len) {
+  if ( len === void 0 ) len = 10;
+
+  var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('');
+  var str = '';
+  for (var i = 0; i < len; i++) {
+    str += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return str;
 };
 
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -436,7 +445,7 @@ Weixiao.prototype.getMediaInfo = function getMediaInfo (mediaId) {
   };
   params['sign'] = this.sign(params, this.api.secret);
   return new Promise(function (resolve, reject) {
-    jsonp(MEDIA_INFO_URL, params, 'callback_name')
+    okJsonp_common(MEDIA_INFO_URL, params, 'callback_name')
       .then(
         function (res) {
           if (res.errmsg) { reject(res.errmsg); }
