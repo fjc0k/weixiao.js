@@ -1,5 +1,5 @@
 /*!
- * weixiao.js v1.0.2 
+ * weixiao.js v1.0.4 
  * (c) 2017 fjc0k
  * Released under the MIT License.
  */
