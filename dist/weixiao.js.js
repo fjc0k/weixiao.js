@@ -1,5 +1,5 @@
 /*!
- * weixiao.js v1.0.1 
+ * weixiao.js v1.0.2 
  * (c) 2017 fjc0k
  * Released under the MIT License.
  */
@@ -434,7 +434,7 @@ Weixiao.prototype.getMediaInfo = function getMediaInfo (mediaId) {
     nonce_str: randomString(32),
     timestamp: Math.round(+new Date() / 1000)
   };
-  params['sign'] = sign(params, this.api.secret);
+  params['sign'] = this.sign(params, this.api.secret);
   return new Promise(function (resolve, reject) {
     jsonp(MEDIA_INFO_URL, params, 'callback_name')
       .then(
@@ -449,6 +449,10 @@ Weixiao.prototype.getMediaInfo = function getMediaInfo (mediaId) {
         reject
       );
   });
+};
+
+Weixiao.prototype.sign = function sign$1 (params, secret) {
+  return sign(params, secret);
 };
 
 Weixiao.prototype.getQRCode = function getQRCode (mediaId) {

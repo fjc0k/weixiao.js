@@ -38,7 +38,7 @@ export default class Weixiao {
       nonce_str: randomString(32),
       timestamp: Math.round(+new Date() / 1000)
     };
-    params['sign'] = sign(params, this.api.secret);
+    params['sign'] = this.sign(params, this.api.secret);
     return new Promise((resolve, reject) => {
       jsonp(MEDIA_INFO_URL, params, 'callback_name')
         .then(
@@ -53,6 +53,10 @@ export default class Weixiao {
           reject
         );
     });
+  }
+
+  sign(params, secret) {
+    return sign(params, secret);
   }
 
   getQRCode(mediaId) {
