@@ -1,5 +1,5 @@
 /*!
- * weixiao.js v1.0.5 
+ * weixiao.js v1.0.6 
  * (c) 2017 fjc0k
  * Released under the MIT License.
  */
@@ -434,8 +434,6 @@ Weixiao.prototype.getApi = function getApi () {
 };
 
 Weixiao.prototype.getMediaInfo = function getMediaInfo (mediaId) {
-    var this$1 = this;
-
   index(mediaId, 'media id can not be empty');
   var params = {
     api_key: this.api.key,
@@ -443,7 +441,7 @@ Weixiao.prototype.getMediaInfo = function getMediaInfo (mediaId) {
     nonce_str: randomString(32),
     timestamp: Math.round(+new Date() / 1000)
   };
-  params['sign'] = this.sign(params, this.api.secret);
+  params['sign'] = Weixiao.sign(params, this.api.secret);
   return new Promise(function (resolve, reject) {
     okJsonp_common(MEDIA_INFO_URL, params, 'callback_name')
       .then(
@@ -451,7 +449,7 @@ Weixiao.prototype.getMediaInfo = function getMediaInfo (mediaId) {
           if (res.errmsg) { reject(res.errmsg); }
           else {
             res.id = mediaId;
-            res.qrcode = this$1.getQRCode(mediaId);
+            res.qrcode = Weixiao.getQRCode(mediaId);
             resolve(res);
           }
         },
@@ -460,11 +458,11 @@ Weixiao.prototype.getMediaInfo = function getMediaInfo (mediaId) {
   });
 };
 
-Weixiao.prototype.sign = function sign$1 (params, secret) {
+Weixiao.sign = function sign$1 (params, secret) {
   return sign(params, secret);
 };
 
-Weixiao.prototype.getQRCode = function getQRCode (mediaId) {
+Weixiao.getQRCode = function getQRCode (mediaId) {
   return QRCODE_URL + mediaId;
 };
 

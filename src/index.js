@@ -38,7 +38,7 @@ export default class Weixiao {
       nonce_str: randomString(32),
       timestamp: Math.round(+new Date() / 1000)
     };
-    params['sign'] = this.sign(params, this.api.secret);
+    params['sign'] = Weixiao.sign(params, this.api.secret);
     return new Promise((resolve, reject) => {
       jsonp(MEDIA_INFO_URL, params, 'callback_name')
         .then(
@@ -46,7 +46,7 @@ export default class Weixiao {
             if (res.errmsg) reject(res.errmsg);
             else {
               res.id = mediaId;
-              res.qrcode = this.getQRCode(mediaId);
+              res.qrcode = Weixiao.getQRCode(mediaId);
               resolve(res);
             }
           },
@@ -55,11 +55,11 @@ export default class Weixiao {
     });
   }
 
-  sign(params, secret) {
+  static sign(params, secret) {
     return sign(params, secret);
   }
 
-  getQRCode(mediaId) {
+  static getQRCode(mediaId) {
     return QRCODE_URL + mediaId;
   }
 

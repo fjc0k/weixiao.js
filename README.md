@@ -1,6 +1,6 @@
 # weixiao.js
 一个小巧的腾讯微校开放平台js封装库~
-> 库本身未引入 Promise Polyfill, 若有需要, 请自行引入!
+> 库本身未引入 Promise Polyfill([推荐: taylorhakes/promise-polyfill](https://github.com/taylorhakes/promise-polyfill)), 若有需要, 请自行引入!
 ## Install
 #### Node
 ```shell
@@ -39,8 +39,6 @@ wx.getMediaInfo(mediaId).then(
 // school_code: "950944945943"
 // school_name: "深圳大学"
 
-// 通过 mediaId 获取二维码图片地址
-wx.getQRCode(mediaId);
 
 // 辅助方法
 wx.setApi({
@@ -48,10 +46,16 @@ wx.setApi({
   secret: 'newSecret'
 });
 wx.getApi();
-wx.sign({
+
+
+// 静态方法
+// 通过 mediaId 获取二维码图片地址
+Weixiao.getQRCode(mediaId);
+// 签名
+Weixiao.sign({
   hello: 'world',
   mm: 'hhh'
-}, 'yourSecret'); // 签名
+}, 'yourSecret');
 ```
 ### Browser
 ```javascript
@@ -79,8 +83,6 @@ wx.getMediaInfo(mediaId).then(
 // school_code: "950944945943"
 // school_name: "深圳大学"
 
-// 通过 mediaId 获取二维码图片地址
-wx.getQRCode(mediaId);
 
 // 辅助方法
 wx.setApi({
@@ -88,4 +90,14 @@ wx.setApi({
   secret: 'newSecret'
 });
 wx.getApi();
+
+
+// 静态方法
+// 通过 mediaId 获取二维码图片地址
+Weixiao.getQRCode(mediaId);
+// 签名
+Weixiao.sign({
+  hello: 'world',
+  mm: 'hhh'
+}, 'yourSecret');
 ```

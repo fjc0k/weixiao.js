@@ -23,7 +23,7 @@ const wx = new Weixiao(api);
 describe('weixiao.js test', () => {
 
   it('getQRCode', () => {
-    expect(wx.getQRCode(testMedia.id)).to.equal(testMedia.qrcode);
+    expect(Weixiao.getQRCode(testMedia.id)).to.equal(testMedia.qrcode);
   });
 
   it('getMediaInfo', () => {
