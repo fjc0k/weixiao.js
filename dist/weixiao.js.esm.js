@@ -1,5 +1,5 @@
 /*!
- * weixiao.js v1.0.6 
+ * weixiao.js v1.0.7 
  * (c) 2017 fjc0k
  * Released under the MIT License.
  */
@@ -405,8 +405,8 @@ var sign = function (params, key) {
  * Created by 方剑成 on 2017/4/22.
  */
 
-var MEDIA_INFO_URL = 'http://weixiao.qq.com/common/get_media_infop';
-var QRCODE_URL = 'http://open.weixin.qq.com/qr/code/?username=';
+var MEDIA_INFO_URL = location.protocol + '//weixiao.qq.com/common/get_media_infop';
+var QRCODE_URL = location.protocol + '//open.weixin.qq.com/qr/code/?username=';
 
 var Weixiao = function Weixiao(api) {
   if (!!api) { this.setApi(api); }

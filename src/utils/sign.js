@@ -18,4 +18,4 @@ export default function (params, key) {
 
   return md5(queryString + '&key=' + key).toUpperCase();
 
-};
+}

@@ -1,6 +1,6 @@
 {
   "name": "weixiao.js",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "一个小巧的腾讯微校开放平台js封装库~",
   "main": "dist/weixiao.js.common.js",
   "jsnext:main": "dist/weixiao.js.esm.js",

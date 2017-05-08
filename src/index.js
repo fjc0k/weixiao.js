@@ -9,8 +9,8 @@ import {
   sign
 } from './utils';
 
-const MEDIA_INFO_URL = 'http://weixiao.qq.com/common/get_media_infop';
-const QRCODE_URL = 'http://open.weixin.qq.com/qr/code/?username=';
+const MEDIA_INFO_URL = location.protocol + '//weixiao.qq.com/common/get_media_infop';
+const QRCODE_URL = location.protocol + '//open.weixin.qq.com/qr/code/?username=';
 
 export default class Weixiao {
 

@@ -11,7 +11,7 @@ npm i weixiao.js -S
 <script src="./dist/weixiao.js.min.js"></script>
 ```
 ## Usage
-### Node
+#### Node
 ```javascript
 import Weixiao from 'weixiao.js';
 
@@ -57,7 +57,7 @@ Weixiao.sign({
   mm: 'hhh'
 }, 'yourSecret');
 ```
-### Browser
+#### Browser
 ```javascript
 var api = {
   key: 'key',
@@ -71,10 +71,11 @@ var wx = new Weixiao(api);
 // 文档: http://open.weixiao.qq.com/app/index.html#/api?content=getInfo&_k=woxdbt
 // 注: 若获取成功, 除返回官方文档给出的全部参数外,
 // 还会返回 id（等于mediaId）、qrcode（公众号二维码图片地址） 参数
-wx.getMediaInfo(mediaId).then(
-  info => console.log(info),
-  err => console.log(err)
-);
+wx.getMediaInfo(mediaId).then(function (info) {
+  return console.log(info);
+}, function (err) {
+  return console.log(err);
+});
 // 返回示例:
 // id: "gh_3daf2618b310"
 // media_number: "iweschool"
@@ -90,7 +91,6 @@ wx.setApi({
   secret: 'newSecret'
 });
 wx.getApi();
-
 
 // 静态方法
 // 通过 mediaId 获取二维码图片地址
