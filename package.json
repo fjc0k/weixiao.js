@@ -1,6 +1,6 @@
 {
   "name": "weixiao.js",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "腾讯微校应用开放平台 API",
   "main": "lib/server.js",
   "module": "src/server.js",
@@ -9,7 +9,7 @@
     "build:server": "babel src --out-dir lib",
     "build:browser": "bili src/browser.js --format all --compress --outDir browser --filename weixiao --moduleName Weixiao",
     "build": "yarn run build:server & yarn run build:browser",
-    "test": "cross-env BABEL_ENV=test jest --env node"
+    "test": "yarn run build & cross-env BABEL_ENV=test jest --env node"
   },
   "keywords": [
     "weixiao"
@@ -31,10 +31,11 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-2": "^6.24.1",
+    "bili": "^0.18.1",
     "cross-env": "^5.0.5",
-    "jest": "^20.0.4",
-    "bili": "^0.18.1"
+    "jest": "^20.0.4"
   }
 }

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import Weixiao from '../src/browser';
+import Weixiao from '../lib/browser';
 import cfg from './config';
 
 const wx = new Weixiao(cfg);

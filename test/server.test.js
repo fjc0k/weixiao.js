@@ -1,4 +1,4 @@
-import Weixiao from '../src/server';
+import Weixiao from '../lib/server';
 import cfg from './config';
 
 const wx = new Weixiao(cfg);
