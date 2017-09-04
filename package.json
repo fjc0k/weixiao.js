@@ -1,12 +1,15 @@
 {
   "name": "weixiao.js",
-  "version": "1.0.7",
-  "description": "一个小巧的腾讯微校开放平台js封装库~",
-  "main": "dist/weixiao.js.common.js",
-  "jsnext:main": "dist/weixiao.js.esm.js",
+  "version": "2.0.0",
+  "description": "腾讯微校应用开放平台 API",
+  "main": "lib/server.js",
+  "module": "src/server.js",
+  "browser": "browser/weixiao.common.js",
   "scripts": {
-    "build": "node ./bin/build.js",
-    "test": "(npm run build && \"./node_modules/.bin/mocha-phantomjs\" test/index.html) || exit 0"
+    "build:server": "babel src --out-dir lib",
+    "build:browser": "bili src/browser.js --format all --compress --outDir browser --filename weixiao --moduleName Weixiao",
+    "build": "yarn run build:server & yarn run build:browser",
+    "test": "cross-env BABEL_ENV=test jest --env node"
   },
   "keywords": [
     "weixiao"
@@ -15,19 +18,23 @@
     "type": "git",
     "url": "git+https://github.com/fjc0k/weixiao.js.git"
   },
-  "author": "fjc0k",
+  "author": {
+    "name": "Funch",
+    "email": "fjc0kb@gmail.com"
+  },
   "license": "MIT",
   "dependencies": {
-    "assert-ok": "^1.0.0",
+    "axios": "^0.16.2",
     "blueimp-md5": "^2.7.0",
+    "crypto": "^1.0.1",
     "ok-jsonp": "^1.0.0"
   },
   "devDependencies": {
-    "babel-standalone": "^6.23.1",
-    "chai": "^3.5.0",
-    "mocha": "^3.2.0",
-    "mocha-phantomjs": "^4.1.0",
-    "promise-polyfill": "^6.0.2",
-    "rollup-make-bundles": "^1.0.7"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "cross-env": "^5.0.5",
+    "jest": "^20.0.4",
+    "bili": "^0.18.1"
   }
 }

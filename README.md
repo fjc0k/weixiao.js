@@ -1,103 +1,72 @@
-# weixiao.js
-一个小巧的腾讯微校开放平台js封装库~
-> 库本身未引入 Promise Polyfill([推荐: taylorhakes/promise-polyfill](https://github.com/taylorhakes/promise-polyfill)), 若有需要, 请自行引入!
-## Install
-#### Node
+# weixiao.js - 腾讯微校应用开放平台 API
+
+腾讯微校应用开发文档：[http://open.weixiao.qq.com/app/index.html#/api?content=beforeStart&_k=d8q1ae](http://open.weixiao.qq.com/app/index.html#/api?content=beforeStart&_k=d8q1ae)
+
+## 安装
+
 ```shell
-npm i weixiao.js -S
+yarn add weixiao.js
 ```
-#### Browser
-```html
-<script src="./dist/weixiao.js.min.js"></script>
+或
+```shell
+npm install weixiao.js -S
 ```
-## Usage
-#### Node
+
+## 使用
+
+### 服务器端使用
+
+```javascript
+const Weixiao = require('weixiao.js');
+
+const wx = new Weixiao({
+  key: 'your key',
+  secret: 'your secret',
+  token: 'your token' // 仅 "消息回复类" 应用需要 token
+});
+
+(async () => {
+
+  // 获取公众号信息
+  // 返回结果格式如：{ name: '人民日报', ..., qrcode: '公众号二维码URL' }
+  const mediaInfo = await wx.getMediaInfo('media id');
+
+  // 获取公众号设置的应用关键词
+  // 返回结果格式格式如：[ '关键词1', '关键词2', ... ]
+  const mediaKeywords = await wx.getMediaKeywords('media id');
+
+  // 签名验证
+  // 该方法会根据传入的参数自动进行微校开放平台签名验证或微信公众平台签名验证
+  // 返回结果格式格式如：true
+  const checkSignResult = wx.checkSign('待验证的参数对象');
+
+  // 时间戳验证
+  // 该方法会检查当前时间戳与传入参数中的 timestamp 字段是否在一个合理的范围，以防止重放攻击
+  // 返回结果格式格式如：true
+  const checkIntervalResult = wx.checkInterval(
+    '待验证的参数对象', // 若参数对象不含 timestamp 字段，将直接返回 false
+    60 // 允许的最大时间差，单位：秒
+  );
+
+})();
+
+```
+
+### 浏览器端使用
+
+> 你需自行引入 Promise Polyfill（推荐：[taylorhakes/promise-polyfill](https://github.com/taylorhakes/promise-polyfill)）。
+
 ```javascript
 import Weixiao from 'weixiao.js';
 
-const api = {
-  key: 'key',
-  secret: 'secret'
-};
-let mediaId = 'hello';
-
-const wx = new Weixiao(api);
-
-// 获取公众号基本信息
-// 文档: http://open.weixiao.qq.com/app/index.html#/api?content=getInfo&_k=woxdbt
-// 注: 若获取成功, 除返回官方文档给出的全部参数外,
-// 还会返回 id（等于mediaId）、qrcode（公众号二维码图片地址） 参数
-wx.getMediaInfo(mediaId).then(
-  info => console.log(info),
-  err => console.log(err)
-);
-// 返回示例:
-// id: "gh_3daf2618b310"
-// media_number: "iweschool"
-// name: "腾讯微校"
-// qrcode: "http://open.weixin.qq.com/qr/code/?username=gh_3daf2618b310"
-// school_code: "950944945943"
-// school_name: "深圳大学"
-
-
-// 辅助方法
-wx.setApi({
-  key: 'newKey',
-  secret: 'newSecret'
+const wx = new Weixiao({
+  key: 'your key',
+  secret: 'your secret'
 });
-wx.getApi();
 
+// 获取公众号信息
+wx.getMediaInfo('media id')
+  .then(info => console.log(info))
+  .catch(err => console.log(err));
 
-// 静态方法
-// 通过 mediaId 获取二维码图片地址
-Weixiao.getQRCode(mediaId);
-// 签名
-Weixiao.sign({
-  hello: 'world',
-  mm: 'hhh'
-}, 'yourSecret');
-```
-#### Browser
-```javascript
-var api = {
-  key: 'key',
-  secret: 'secret'
-};
-var mediaId = 'hello';
-
-var wx = new Weixiao(api);
-
-// 获取公众号基本信息
-// 文档: http://open.weixiao.qq.com/app/index.html#/api?content=getInfo&_k=woxdbt
-// 注: 若获取成功, 除返回官方文档给出的全部参数外,
-// 还会返回 id（等于mediaId）、qrcode（公众号二维码图片地址） 参数
-wx.getMediaInfo(mediaId).then(function (info) {
-  return console.log(info);
-}, function (err) {
-  return console.log(err);
-});
-// 返回示例:
-// id: "gh_3daf2618b310"
-// media_number: "iweschool"
-// name: "腾讯微校"
-// qrcode: "http://open.weixin.qq.com/qr/code/?username=gh_3daf2618b310"
-// school_code: "950944945943"
-// school_name: "深圳大学"
-
-
-// 辅助方法
-wx.setApi({
-  key: 'newKey',
-  secret: 'newSecret'
-});
-wx.getApi();
-
-// 静态方法
-// 通过 mediaId 获取二维码图片地址
-Weixiao.getQRCode(mediaId);
-// 签名
-Weixiao.sign({
-  hello: 'world',
-  mm: 'hhh'
-}, 'yourSecret');
 ```
