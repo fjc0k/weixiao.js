@@ -43,7 +43,7 @@ const wx = new Weixiao({
   // 时间戳验证
   // 该方法会检查当前时间戳与传入参数中的 timestamp 字段是否在一个合理的范围，以防止重放攻击
   // 返回结果格式格式如：true
-  const checkIntervalResult = wx.checkInterval(
+  const checkIntervalResult = Weixiao.checkInterval(
     '待验证的参数对象', // 若参数对象不含 timestamp 字段，将直接返回 false
     60 // 允许的最大时间差，单位：秒
   );
