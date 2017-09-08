@@ -102,6 +102,7 @@ export default class Weixiao {
         .$post(config.urls.getMediaInfo, { media_id: mediaId })
         .then(info => {
           info.qrcode = Weixiao.getQRCode(mediaId);
+          info.avatar_image = info.avatar_image.replace('http:', 'https:');
           resolve(info);
         })
         .catch(reject);
