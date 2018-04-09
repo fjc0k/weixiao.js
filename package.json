@@ -1,6 +1,6 @@
 {
   "name": "weixiao.js",
-  "version": "2.1.2",
+  "version": "2.2.2",
   "description": "腾讯微校应用开放平台 API",
   "main": "lib/server.js",
   "module": "src/server.js",
@@ -16,10 +16,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fjc0k/weixiao.js.git"
+    "url": "fjc0k/weixiao.js"
   },
   "author": {
-    "name": "Funch",
+    "name": "fjc0k",
     "email": "fjc0kb@gmail.com"
   },
   "license": "MIT",
